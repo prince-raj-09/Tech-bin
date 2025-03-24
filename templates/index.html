@@ -3,29 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Waste Classification</title>
-    <link rel="stylesheet" type="text/css" href="../static/styles.css">
+    <title>AI Waste Classifier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: auto;
+        }
+        h1 {
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        img {
+            margin-top: 20px;
+            max-width: 100%;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h1>Waste Classification System</h1>
-        <p>Upload an image to classify the waste type.</p>
+        
+        <form action="/analyze" method="post">
+            <input type="text" name="image_url" placeholder="Enter Image URL" required>
+            <button type="submit">Analyze</button>
+        </form>
 
-        <!-- Upload Box -->
-        <div class="upload-box" id="dropArea">
-            <div class="upload-icon">⬆</div>
-            <p>Drag and drop files</p>
-            <label for="imageInput">or Browse</label>
-            <input type="file" id="imageInput" accept="image/*">
-        </div>
-
-        <!-- Upload Button -->
-        <button id="uploadBtn">Upload & Analyze</button>
-
-        <!-- Result Box -->
-        <div class="result-box" id="result">Result will appear here...</div>
+        {% if result %}
+            <div class="result">Result: {{ result }}</div>
+            {% if image_url %}
+                <img src="{{ image_url }}" alt="Uploaded Image">
+            {% endif %}
+        {% endif %}
     </div>
-
-    <script src="../static/script.js"></script>
 </body>
 </html>
